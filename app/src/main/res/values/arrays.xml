@@ -29,4 +29,9 @@
         <item>Exclude selected applications from the VPN</item>
         <item>Only selected applications use the VPN</item>
     </string-array>
+
+    <string-array name="authentication_mode">
+        <item>Username/Password</item>
+        <item>Certificate</item>
+    </string-array>
 </resources>

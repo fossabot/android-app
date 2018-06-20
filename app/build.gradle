@@ -41,7 +41,7 @@ android {
         }
     }
 
-    packagingOptions{
+    packagingOptions {
         doNotStrip '*/mips/*.so'
         doNotStrip '*/mips64/*.so'
     }
@@ -50,5 +50,10 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support.constraint:constraint-layout:1.1.2'
     testCompile 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'

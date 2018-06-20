@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2012-2015 Tobias Brunner
     Copyright (C) 2012 Giuliano Grassi
     Copyright (C) 2012 Ralf Sager
@@ -24,59 +23,58 @@
 
     <application
         android:name=".logic.StrongSwanApplication"
+        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/ApplicationTheme"
-        android:allowBackup="false" >
+        android:theme="@style/ApplicationTheme">
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/main_activity_name"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="org.strongswan.android.action.START_PROFILE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.VpnProfileDetailActivity" >
-        </activity>
+        <activity android:name=".ui.VpnProfileDetailActivity"></activity>
         <activity
             android:name=".ui.TrustedCertificatesActivity"
-            android:label="@string/trusted_certs_title" >
-        </activity>
+            android:label="@string/trusted_certs_title"></activity>
         <activity
             android:name=".ui.SelectedApplicationsActivity"
-            android:label="@string/profile_select_apps" >
-        </activity>
+            android:label="@string/profile_select_apps"></activity>
         <activity
             android:name=".ui.LogActivity"
-            android:label="@string/log_title" >
-        </activity>
+            android:label="@string/log_title"></activity>
         <activity
             android:name=".ui.RemediationInstructionsActivity"
-            android:label="@string/remediation_instructions_title" >
-        </activity>
+            android:label="@string/remediation_instructions_title"></activity>
         <activity
             android:name=".ui.VpnProfileSelectActivity"
-            android:label="@string/strongswan_shortcut" >
+            android:label="@string/strongswan_shortcut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.VpnProfileImportActivity"
+            android:excludeFromRecents="true"
             android:label="@string/profile_import"
-            android:taskAffinity=""
-            android:excludeFromRecents="true" >
+            android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:scheme="file" />
@@ -85,8 +83,10 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:scheme="file" />
@@ -101,10 +101,12 @@
         <activity
             android:name=".ui.TrustedCertificateImportActivity"
             android:label="@string/import_certificate"
-            android:theme="@style/AlertDialogTheme" >
+            android:theme="@style/AlertDialogTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="application/x-x509-ca-cert" />
                 <data android:mimeType="application/x-x509-server-cert" />
                 <data android:mimeType="application/x-pem-file" />
@@ -114,12 +116,11 @@
 
         <service
             android:name=".logic.VpnStateService"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
         <service
             android:name=".logic.CharonVpnService"
             android:exported="false"
-            android:permission="android.permission.BIND_VPN_SERVICE" >
+            android:permission="android.permission.BIND_VPN_SERVICE">
             <intent-filter>
                 <action android:name="android.net.VpnService" />
             </intent-filter>
@@ -128,11 +129,16 @@
         <provider
             android:name=".data.LogContentProvider"
             android:authorities="org.strongswan.android.content.log"
-            android:exported="true" >
-            <!-- android:grantUriPermissions="true" combined with a custom permission does
+            android:exported="true">
+
+            <!--
+                 android:grantUriPermissions="true" combined with a custom permission does
                  not work (probably too many indirections with ACTION_SEND) so we secure
-                 this provider with a custom ticketing system -->
+                 this provider with a custom ticketing system
+            -->
         </provider>
+
+        <activity android:name=".gardionui.GardionMainActivity"></activity>
     </application>
 
 </manifest>
