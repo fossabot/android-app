@@ -42,19 +42,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.VpnProfileDetailActivity"></activity>
+        <activity android:name=".ui.VpnProfileDetailActivity" />
         <activity
             android:name=".ui.TrustedCertificatesActivity"
-            android:label="@string/trusted_certs_title"></activity>
+            android:label="@string/trusted_certs_title" />
         <activity
             android:name=".ui.SelectedApplicationsActivity"
-            android:label="@string/profile_select_apps"></activity>
+            android:label="@string/profile_select_apps" />
         <activity
             android:name=".ui.LogActivity"
-            android:label="@string/log_title"></activity>
+            android:label="@string/log_title" />
         <activity
             android:name=".ui.RemediationInstructionsActivity"
-            android:label="@string/remediation_instructions_title"></activity>
+            android:label="@string/remediation_instructions_title" />
         <activity
             android:name=".ui.VpnProfileSelectActivity"
             android:label="@string/strongswan_shortcut">
@@ -116,7 +116,7 @@
 
         <service
             android:name=".logic.VpnStateService"
-            android:exported="false"></service>
+            android:exported="false" />
         <service
             android:name=".logic.CharonVpnService"
             android:exported="false"
@@ -138,7 +138,8 @@
             -->
         </provider>
 
-        <activity android:name=".gardionui.GardionMainActivity"></activity>
+        <activity android:name=".gardionui.GardionMainActivity" />
+        <activity android:name=".gardionui.GardionVpnActivity"></activity>
     </application>
 
 </manifest>
