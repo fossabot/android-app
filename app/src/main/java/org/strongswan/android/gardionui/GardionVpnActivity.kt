@@ -2,7 +2,6 @@ package org.strongswan.android.gardionui
 
 import android.app.Activity
 import android.app.Service
-import android.app.Service.*
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Intent
@@ -19,11 +18,11 @@ import org.strongswan.android.data.VpnProfileDataSource
 import org.strongswan.android.data.VpnType
 import org.strongswan.android.logic.CharonVpnService
 import org.strongswan.android.logic.VpnStateService
+import org.strongswan.android.logic.VpnStateService.State
 import org.strongswan.android.toast
 import org.strongswan.android.utils.Constants
 import org.strongswan.android.utils.KeyStoreManager
 import java.util.*
-import org.strongswan.android.logic.VpnStateService.*
 
 
 class GardionVpnActivity : AppCompatActivity(), VpnStateService.VpnStateListener {
@@ -31,10 +30,10 @@ class GardionVpnActivity : AppCompatActivity(), VpnStateService.VpnStateListener
     private val PROFILE_REQUIRES_PASSWORD = "org.strongswan.android.MainActivity.REQUIRES_PASSWORD"
 
     private val PROFILE_NAME = "org.strongswan.android.MainActivity.PROFILE_NAME"
-    private var mProfileInfo: Bundle = Bundle()
     private val PREPARE_VPN_SERVICE = 0
+    private lateinit var mProfileInfo: Bundle
     private var mProfile: VpnProfile? = VpnProfile()
-    private var mDataSource: VpnProfileDataSource? = VpnProfileDataSource(this)
+    private lateinit var mDataSource: VpnProfileDataSource
     private var mService: VpnStateService? = null
     private val mServiceConnection = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName) {
@@ -98,15 +97,16 @@ class GardionVpnActivity : AppCompatActivity(), VpnStateService.VpnStateListener
         info_screen_text.text = "We are saving your credentials"
         info_screen_progress_bar.visibility = View.VISIBLE
         updateProfileData()
-        mDataSource?.open()
-        mDataSource?.insertProfile(mProfile)
+        mDataSource = VpnProfileDataSource(this)
+        mDataSource.open()
+        mDataSource.insertProfile(mProfile)
         if (mProfile?.uuid == null) {
             mProfile?.uuid = UUID.randomUUID()
         }
-        mDataSource?.updateVpnProfile(mProfile)
+        mDataSource.updateVpnProfile(mProfile)
         val intent = Intent(Constants.VPN_PROFILES_CHANGED)
         intent.putExtra(Constants.VPN_PROFILES_SINGLE, mProfile?.id)
-        mDataSource?.close()
+        mDataSource.close()
         info_screen_text.text = "Credentials Saved. You can start VPN"
         info_screen_progress_bar.visibility = View.INVISIBLE
     }
@@ -142,7 +142,7 @@ class GardionVpnActivity : AppCompatActivity(), VpnStateService.VpnStateListener
         prepareVpnService(bundle)
     }
 
-    protected fun prepareVpnService(profileInfo: Bundle) {
+    private fun prepareVpnService(profileInfo: Bundle) {
         val intent: Intent?
         try {
             intent = VpnService.prepare(this)
