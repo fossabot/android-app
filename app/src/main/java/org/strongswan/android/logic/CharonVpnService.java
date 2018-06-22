@@ -146,7 +146,7 @@ public class CharonVpnService extends VpnService implements Runnable, VpnStateSe
 				setNextProfile(profile);
 			}
 		}
-		return START_NOT_STICKY;
+		return START_STICKY;
 	}
 
 	@Override
@@ -244,7 +244,7 @@ public class CharonVpnService extends VpnService implements Runnable, VpnStateSe
 						startConnection(mCurrentProfile);
 						mIsDisconnecting = false;
 
-						addNotification();
+//						addNotification();
 						BuilderAdapter builder = new BuilderAdapter(mCurrentProfile);
 						if (initializeCharon(builder, mLogFile, mAppDir, mCurrentProfile.getVpnType().has(VpnTypeFeature.BYOD)))
 						{

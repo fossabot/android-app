@@ -36,12 +36,14 @@ import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import org.strongswan.android.R;
 import org.strongswan.android.data.VpnProfile;
 import org.strongswan.android.data.VpnProfileDataSource;
+import org.strongswan.android.gardionui.GardionVpnActivity;
 import org.strongswan.android.ui.adapter.VpnProfileAdapter;
 import org.strongswan.android.utils.Constants;
 
@@ -124,6 +126,14 @@ public class VpnProfileListFragment extends Fragment
 		mListView.setAdapter(mListAdapter);
 		mListView.setEmptyView(view.findViewById(R.id.profile_list_empty));
 		mListView.setOnItemClickListener(mVpnProfileClicked);
+		Button button = (Button) view.findViewById(R.id.go_to_gardion);
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getActivity(), GardionVpnActivity.class);
+				startActivity(intent);
+			}
+		});
 
 		if (!mReadOnly)
 		{
